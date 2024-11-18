@@ -39,35 +39,35 @@ Here are some of the steps taken to ensure the data was clean and ready for anal
 # Data Findings
 
 ## 1. Total Sales by Each Promotion
-![alt text](image.png)
+![alt text](images/image.png)
 - **Observation**: Promotion 1 has the highest total sales, followed by Promotion 3, and Promotion 2 has the lowest total sales.
 
 ## 2. Sales Trends Over Time (Weekly Analysis)
-![alt text](image-1.png)
+![alt text](images/image-1.png)
 - **Observation**: Sales peaked in week 2, then dropped significantly in week 3 and remained stable in week 4.
 
 ## 3. Influence of Market Size on Sales Across Different Promotions
-![alt text](image-2.png)
+![alt text](images/image-2.png)
 - **Observation**: Medium-sized markets have the highest average sales across all promotions, while small markets have the lowest average sales.
 
 ## 4. Consistency of Promotion Performance Across Market Sizes
-![alt text](image-3.png)
+![alt text](images/image-3.png)
 - **Observation**: Promotion 1 performs consistently well across all market sizes, while Promotion 2 performs better in medium and large markets.
 
 ## 5. Performance of Older Stores (High AgeOfStore) Compared to Newer Stores
-![alt text](image-4.png)
+![alt text](images/image-4.png)
 - **Observation**: Older stores (with higher AgeOfStore) tend to have higher average sales compared to newer stores except the 5-7 ages.
 
 ## 6. Interactions Between Market Size, Store Age, and Promotions
-![alt text](image-5.png)
+![alt text](images/image-5.png)
 - **Observation**: There are significant interactions between market size, store age, and promotions. For example, Promotion 1 performs exceptionally well in medium-sized markets with older stores.
 
 ## 7. Signs of Diminishing Returns Over Time for Promotions
-![alt text](image-6.png)
+![alt text](images/image-6.png)
 - **Observation**: Promotion 1 shows signs of diminishing returns over time, with sales peaking in week 2 and then declining.
 
 ## 8. Sales Distributions Among Promotions
-![alt text](image-7.png)
+![alt text](images/image-7.png)
 - **Observation**: Promotion 1 has a wider distribution of sales, indicating variability in its effectiveness. Promotion 2 has a more consistent sales distribution.
 
 # Recommendations
