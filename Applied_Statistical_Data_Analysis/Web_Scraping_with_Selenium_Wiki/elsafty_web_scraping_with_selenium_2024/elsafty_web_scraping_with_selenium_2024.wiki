@@ -1,8 +1,13 @@
 = A Guide to Web Scraping with Selenium in Python =
 
 == Introduction ==
-[[File:web_scraping_diagram.png|thumb|800px|center|Web Scraping Diagram: A visual representation of the web scraping process, depicting data extraction from a website and its transformation into a usable format.]]
-
+<div class="image-container">
+    <span class="file-link">File:web_scraping_diagram.png</span>
+    <span class="thumb">
+        <span class="thumbinner"><span class="thumbimage"><span style="width:800px;display:block;"></span></span>
+        <div class="thumbcaption">Web Scraping Diagram: A visual representation of the web scraping process, depicting data extraction from a website and its transformation into a usable format.</div>
+    </span></span>
+</div>
 
 ''Web scraping, the automated process of extracting data from websites, is a crucial skill in today's data-driven world.'' Whether you are a data scientist, researcher, or simply curious about gathering information from the web, the ability to programmatically extract data opens a lot of possibilities. While traditional web scraping methods work well for static websites, the increasing prevalence of dynamic, JavaScript-heavy websites makes these tools less effective. This is where Selenium comes in, a powerful browser automation framework that mimics human interactions with a browser. In essence, Selenium is able to "see" the website the same way a human would. This guide provides a hands-on approach to using Selenium for web scraping in Python, offering step-by-step instructions and real-world examples using the '''Quotes to Scrape''' website. By the end of this guide, you'll be equipped to tackle various web scraping challenges, from extracting simple text to handling complex dynamic elements that would be impossible with traditional tools. Imagine you want to analyze product reviews on an e-commerce site that loads reviews as you scroll down; Selenium can automate this process, while other tools might struggle.
 
@@ -17,9 +22,13 @@ Before diving into the practical aspects of web scraping with Selenium, ensure y
 == Understanding Selenium ==
 
 === What is Selenium? ===
-[[File:selenium_logo.png|thumb|200px|center|Selenium Logo: The official logo of the Selenium Project, showcasing its role in browser automation.]]
-
-
+<div class="image-container">
+   <span class="file-link">File:selenium_logo.png</span>
+   <span class="thumb">
+       <span class="thumbinner"><span class="thumbimage"><span style="width:200px;display:block;"></span></span>
+       <div class="thumbcaption">Selenium Logo: The official logo of the Selenium Project, showcasing its role in browser automation.</div>
+   </span></span>
+</div>
 Selenium is an open-source framework designed for automating web browser interactions. Although frequently used for testing web applications, it has become a powerful tool for web scraping. Unlike static scraping tools, Selenium launches and controls a web browser (Chrome, Firefox, Safari, or Edge) that loads a page, executes JavaScript, and renders a complete view. This provides access to data that would be impossible to extract using traditional HTML parsing techniques. Selenium supports different browsers and programming languages such as Java, Python, C# and JavaScript.
 
 === Why Use Selenium for Web Scraping? ===
@@ -39,9 +48,9 @@ First, you need to install the Selenium Python library using pip:
 
 Next, you need a WebDriver, which acts as an interface between your script and the web browser. Download the appropriate WebDriver based on the browser you intend to use. Make sure that the browser version *exactly* matches the web driver's version to avoid compatibility issues.
 
-*   '''ChromeDriver:''' Required for Google Chrome, download from [https://chromedriver.chromium.org/downloads](https://chromedriver.chromium.org/downloads).
-*   '''GeckoDriver:''' Required for Mozilla Firefox, download from [https://github.com/mozilla/geckodriver/releases](https://github.com/mozilla/geckodriver/releases).
-*   '''EdgeDriver:''' Required for Microsoft Edge, download from [https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/).
+*   '''ChromeDriver:''' Required for Google Chrome, download from <span class="link">https://chromedriver.chromium.org/downloads</span>.
+*   '''GeckoDriver:''' Required for Mozilla Firefox, download from <span class="link">https://github.com/mozilla/geckodriver/releases</span>.
+*   '''EdgeDriver:''' Required for Microsoft Edge, download from <span class="link">https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/</span>.
 *   '''SafariDriver:''' Required for Safari, is included with Safari but you may need to enable it from Safari’s develop menu.
 
 Place the downloaded WebDriver executable in a known directory. You will need to provide this path to your Python script.
@@ -49,7 +58,7 @@ Place the downloaded WebDriver executable in a known directory. You will need to
 === Configuring Selenium WebDriver ===
 Here is an example of how to setup and configure Selenium with ChromeDriver. Remember to adjust the path to match the location where you *saved* your WebDriver.
 
-<syntaxhighlight lang="Python">
+<pre>
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -64,7 +73,7 @@ driver = webdriver.Chrome(service=service)
 driver.get('http://quotes.toscrape.com/')
 print(f'Page Title: {driver.title}') # Using an f-string for better output
 driver.quit()
-</syntaxhighlight>
+</pre>
 '''Output:'''
 <pre>Page Title: Quotes to Scrape</pre>
 * '''Important:''': Replace `/path/to/chromedriver` with the actual path where you saved your ChromeDriver executable (typically in your Downloads folder).
@@ -85,9 +94,9 @@ You can configure the browser to run in different ways, like in headless mode or
 === Navigating to a Website ===
 The <code>driver.get()</code> method is used to load a page and begin the scraping process.
 
-<syntaxhighlight lang="Python">
+<pre>
 driver.get('http://quotes.toscrape.com/')
-</syntaxhighlight>
+</pre>
 This simple line of code instructs the Selenium controlled browser to load the page, making it ready for inspection and data extraction.
 
 === Locating Elements ===
@@ -101,7 +110,7 @@ Locating the elements of interest is crucial when scraping web pages. Selenium p
 *   '''By XPath:''' Use <code>driver.find_elements(By.XPATH, 'xpath_expression')</code> to find elements with XPath expressions. XPath is more powerful in cases where CSS selectors are insufficient for element location. XPath is very powerful but has a higher learning curve than CSS selectors.
 
 Here’s an example of how to extract the quotes and author links from the '''Quotes to Scrape''' website:
-<syntaxhighlight lang="Python">
+<pre>
 # Locate all quote elements
 quotes = driver.find_elements(By.CLASS_NAME, 'quote')
 
@@ -114,7 +123,7 @@ for quote in quotes:
         print(f'Author Link: {author_link}')
     except Exception as e:
         print(f"An error occurred: {e}")
-</syntaxhighlight>
+</pre>
 '''Sample Output:'''
 <pre>Quote: “The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.”
 Author Link: /author/Albert-Einstein
@@ -135,7 +144,7 @@ Selenium lets you simulate user interactions, which is crucial for scraping dyna
 *   <code>clear()</code>: Clears the content of an input field
 
 Here is an example of simulating a login on a website (note: the '''Quotes to Scrape''' website does not have a real login, but this is an example of how one could automate login for a real website):
-<syntaxhighlight lang="Python">
+<pre>
 driver.get('https://quotes.toscrape.com/login')
 try:
     login_link = driver.find_element(By.LINK_TEXT, 'Login')
@@ -152,36 +161,47 @@ try:
     # Now you are logged in, and can access the authenticated content
 except Exception as e:
         print(f"An error occurred: {e}")
-</syntaxhighlight>
+</pre>
 This example shows how to find elements using different locators, enter text into the fields, and click the login button. Remember to replace `your_username` and `your_password` with the valid values for the website you are using.
-[[File:login_page.png|thumb|800px|center|Quotes to Scrape Website: A screenshot of the Quotes to Scrape website login page, showcasing the login form and fields.]]
+<div class="image-container">
+   <span class="file-link">File:login_page.png</span>
+   <span class="thumb">
+       <span class="thumbinner"><span class="thumbimage"><span style="width:800px;display:block;"></span></span>
+       <div class="thumbcaption">Quotes to Scrape Website: A screenshot of the Quotes to Scrape website login page, showcasing the login form and fields.</div>
+   </span></span>
+</div>
 
 === Taking Screenshots ===
 Selenium allows you to capture a screenshot of the current webpage, which can be useful for debugging or for visually saving the current state of the browser.
-<syntaxhighlight lang="Python">
+<pre>
 driver.save_screenshot('quotes_homepage.png')
-</syntaxhighlight>
-[[File:homepage.png|thumb|800px|center|Quotes to Scrape Website: A screenshot of the Quotes to Scrape website, showcasing its layout and design.]]
-
+</pre>
+<div class="image-container">
+    <span class="file-link">File:homepage.png</span>
+    <span class="thumb">
+        <span class="thumbinner"><span class="thumbimage"><span style="width:800px;display:block;"></span></span>
+        <div class="thumbcaption">Quotes to Scrape Website: A screenshot of the Quotes to Scrape website, showcasing its layout and design.</div>
+    </span></span>
+</div>
 
 This code saves the current page as a PNG image named `quotes_homepage.png` in the same directory as your script.
 
 === Scrolling Through Web Pages ===
 Many websites load more data as you scroll down. Selenium allows you to automate scrolling using JavaScript:
 
-<syntaxhighlight lang="Python">
+<pre>
 try:
     driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
 except Exception as e:
     print(f"An error occurred when scrolling {e}")
-</syntaxhighlight>
+</pre>
 This will scroll the window to the bottom of the page, loading more content. Make sure to add a wait after the scrolling to give the browser time to load.
 
 == Advanced Techniques for Selenium-Based Web Scraping ==
 
 === Handling Dynamic Website Content ===
 Dynamic content is a significant challenge for web scrapers. Selenium provides the `WebDriverWait` class, which allows you to wait for a specific condition to be met before proceeding. This will help you avoid errors due to trying to access content that is not yet fully loaded.
-<syntaxhighlight lang="Python">
+<pre>
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -192,7 +212,7 @@ try:
     print(f"First Quote: {quote.text}")
 except Exception as e:
     print(f"Error waiting for dynamic content: {e}")
-</syntaxhighlight>
+</pre>
 '''Output:'''
 <pre>First Quote: "Life is what happens to us while we are making other plans." - Allen Saunders</pre>
 This script:
@@ -213,12 +233,12 @@ CAPTCHAs are designed to stop automated bots. There is no fool proof way of bypa
 *   '''Website API:''' Check if the website provides an API. Using the API is preferable to scraping, as it is more reliable and less susceptible to breaking changes.
 *   '''User-Like Behavior:''' Mimicking human behavior using random delays, navigating the website in a more realistic way, and even moving the mouse cursor around will help avoid detection, but it is not guaranteed.
 *   '''Rotating Proxies:''' To avoid IP address blocking, use a pool of proxies.
-*    **Browser fingerprinting manipulation:** Browser fingerprinting techniques are used by websites to detect automated scraping tools. You could use tools and techniques to mask these browser fingerprints.
+*   **Browser fingerprinting manipulation:** Browser fingerprinting techniques are used by websites to detect automated scraping tools. You could use tools and techniques to mask these browser fingerprints.
 
 === Scraping Data Across Multiple Pages ===
 Many websites display information across multiple pages. Selenium can automate the navigation process by clicking next page buttons, or other forms of navigation. Here is an example that uses the next button on the '''Quotes to Scrape''' site:
 
-<syntaxhighlight lang="Python">
+<pre>
 import time
 
 page_num = 1
@@ -242,8 +262,7 @@ while True:
     except Exception as e:
        print(f"No next page found, finished scraping.\nError: {e}")
        break
-
-</syntaxhighlight>
+</pre>
 This will iterate over every page of the website, extracting the quotes and authors. The loop will finish when there is no next button to click. A 2 second delay has been added to be more respectful to the server.
 '''Output Example:'''
 <pre>Scraping Page: 1
@@ -265,11 +284,11 @@ Error: Message: no such element: Unable to locate element: {"method":"css select
 == Ethical Considerations in Web Scraping ==
 Always prioritize ethical behavior while web scraping:
 
-*   '''Check `robots.txt` File:''' Review a website's `robots.txt` file (e.g., `http://example.com/robots.txt`). This file, usually located at the root of the website, specifies which parts of the site are off-limits for bots. Make sure to read it carefully.
+*   '''Check `robots.txt` File:''' Review a website's `robots.txt` file (e.g., <span class="link">http://example.com/robots.txt</span>). This file, usually located at the root of the website, specifies which parts of the site are off-limits for bots. Make sure to read it carefully.
 *   '''Avoid Scraping Sensitive Data:''' Do not scrape personal data or copyrighted information without permission.
 *   '''Limit Request Rate:''' Add delays between requests to avoid overloading servers and getting blocked. Use `time.sleep(seconds)` to introduce delays between requests.
 *   '''Respect Terms of Service:''' Always adhere to a website's terms of service.
-*    '''Be Responsible:''' Do not misuse or redistribute data you scrape without consent.
+*   '''Be Responsible:''' Do not misuse or redistribute data you scrape without consent.
 *   '''Consequences:''' Failing to follow these guidelines could lead to your IP being blocked or even legal action.
 
 == Strengths and Challenges ==
@@ -291,19 +310,19 @@ Always prioritize ethical behavior while web scraping:
 Selenium is an essential tool for modern web scraping, particularly when dealing with dynamic content and user interactions. Combining Selenium with static parsing tools like BeautifulSoup, where Selenium is used for browser interaction and BeautifulSoup for parsing HTML, will greatly enhance your web scraping capabilities. By mastering Selenium, you can adapt to the evolving landscape of web technologies.
 
 == Further Reading ==
-*   Selenium Documentation: [https://www.selenium.dev/documentation/](https://www.selenium.dev/documentation/) - The official documentation for Selenium, which provides comprehensive information about the framework and its components.
-*   Python Selenium API: [https://pypi.org/project/selenium/](https://pypi.org/project/selenium/) - The Python Package Index page for Selenium, where you can find the latest version and specific documentation on the Python API for Selenium.
-*   Web Scraping with Python - Second Edition : [https://nostarch.com/webscrapingwithpython2e](https://nostarch.com/webscrapingwithpython2e) - A more advanced resource that focuses on web scraping with Python and includes selenium as one of the tools.
-*   Real Python Tutorial : [https://realpython.com/web-scraping-python-with-selenium/](https://realpython.com/web-scraping-python-with-selenium/) - A comprehensive guide to web scraping with Selenium.
-*   CSS Selectors Guide: [https://www.w3schools.com/cssref/css_selectors.asp](https://www.w3schools.com/cssref/css_selectors.asp) - A comprehensive guide on CSS Selectors.
-*   XPath Tutorial: [https://www.w3schools.com/xml/xpath_intro.asp](https://www.w3schools.com/xml/xpath_intro.asp) - A comprehensive guide on XPath selectors.
+*   Selenium Documentation: <span class="link">https://www.selenium.dev/documentation/</span> - The official documentation for Selenium, which provides comprehensive information about the framework and its components.
+*   Python Selenium API: <span class="link">https://pypi.org/project/selenium/</span> - The Python Package Index page for Selenium, where you can find the latest version and specific documentation on the Python API for Selenium.
+*   Web Scraping with Python - Second Edition : <span class="link">https://nostarch.com/webscrapingwithpython2e</span> - A more advanced resource that focuses on web scraping with Python and includes selenium as one of the tools.
+*   Real Python Tutorial : <span class="link">https://realpython.com/web-scraping-python-with-selenium/</span> - A comprehensive guide to web scraping with Selenium.
+*   CSS Selectors Guide: <span class="link">https://www.w3schools.com/cssref/css_selectors.asp</span> - A comprehensive guide on CSS Selectors.
+*   XPath Tutorial: <span class="link">https://www.w3schools.com/xml/xpath_intro.asp</span> - A comprehensive guide on XPath selectors.
 
 == References ==
-# Selenium Project, "Selenium WebDriver," accessed October 10, 2023, [https://www.selenium.dev/](https://www.selenium.dev/).
-# GoodReads.com, "Quotes to Scrape," accessed October 10, 2023, [https://quotes.toscrape.com/](https://quotes.toscrape.com/).
-# "Selenium – Components, Features, Uses and Limitations," GeeksforGeeks, accessed October 10, 2023, [https://www.geeksforgeeks.org/selenium-basics-components-features-uses-and-limitations/](https://www.geeksforgeeks.org/selenium-basics-components-features-uses-and-limitations/).
-# "What is Web Scraping? | Practical Uses & Methods," WebHarvy, accessed October 10, 2023, [https://www.webharvy.com/articles/what-is-web-scraping.html](https://www.webharvy.com/articles/what-is-web-scraping.html).
-# "Selenium Logo on Wikimedia Commons," accessed October 10, 2023, [https://commons.wikimedia.org/wiki/File:Selenium_Logo.png](https://commons.wikimedia.org/wiki/File:Selenium_Logo.png).
+# Selenium Project, "Selenium WebDriver," accessed October 10, 2023, <span class="link">https://www.selenium.dev/</span>.
+# GoodReads.com, "Quotes to Scrape," accessed October 10, 2023, <span class="link">https://quotes.toscrape.com/</span>.
+# "Selenium – Components, Features, Uses and Limitations," GeeksforGeeks, accessed October 10, 2023, <span class="link">https://www.geeksforgeeks.org/selenium-basics-components-features-uses-and-limitations/</span>.
+# "What is Web Scraping? | Practical Uses & Methods," WebHarvy, accessed October 10, 2023, <span class="link">https://www.webharvy.com/articles/what-is-web-scraping.html</span>.
+# "Selenium Logo on Wikimedia Commons," accessed October 10, 2023, <span class="link">https://commons.wikimedia.org/wiki/File:Selenium_Logo.png</span>.
 # Mitchell, Ryan. ''Web Scraping with Python: Collecting More Data from the Modern Web.'' 2nd ed., No Starch Press, 2023.
 
 == Author and Date ==
