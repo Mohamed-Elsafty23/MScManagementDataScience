@@ -1,0 +1,9 @@
+pandas
+gspread
+matplotlib
+seaborn
+scipy
+folium
+oauth2client
+jupyter
+numpy
